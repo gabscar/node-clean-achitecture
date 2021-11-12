@@ -7,6 +7,10 @@ describe('Account MongoDB repository', () => {
   afterAll(async () => {
     await MongoHelper.close()
   })
+  beforeEach(async () => {
+    const accountCollection = await MongoHelper.getCollection('accounts')
+    await accountCollection.deleteMany({})
+  })
   test('should retorn account on sucess', async () => {
     const sut = new AccountMongoRepository()
     const account = await sut.add({
