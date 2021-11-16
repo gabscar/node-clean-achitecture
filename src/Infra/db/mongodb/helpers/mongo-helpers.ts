@@ -4,7 +4,7 @@ export const MongoHelper = {
   connection: null as MongoClient,
   url: null as string,
 
-  async connect (url: string) {
+  async connect (url: string): Promise<void> {
     this.url = url
     this.connection = await MongoClient.connect(url, {
       useNewUrlParser: true,
@@ -12,13 +12,13 @@ export const MongoHelper = {
     })
   },
 
-  async close () {
+  async close (): Promise<void> {
     await this.connection.close()
     this.connection = null
   },
 
   async getCollection (name: string): Promise<Collection> {
-    if (!this.connection) {
+    if (!this.connection?.isConnected()) {
       await this.connect(this.url)
     }
     return this.connection.db().collection(name)
