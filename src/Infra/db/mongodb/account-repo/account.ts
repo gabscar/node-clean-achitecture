@@ -5,7 +5,7 @@ import { MongoHelper } from '../helpers/mongo-helpers'
 
 export class AccountMongoRepository implements AddAccountRepository {
   async add (accountData: AddAccountModel): Promise<AccountModel> {
-    const collectionAccount = MongoHelper.getCollection('accounts')
+    const collectionAccount = await MongoHelper.getCollection('accounts')
     const insertionResult = await collectionAccount.insertOne(accountData)
     const insertedAccount = insertionResult.ops[0]
     return MongoHelper.map(insertedAccount)
