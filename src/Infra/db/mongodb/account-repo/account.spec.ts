@@ -11,7 +11,7 @@ describe('Account MongoDB repository', () => {
     const accountCollection = await MongoHelper.getCollection('accounts')
     await accountCollection.deleteMany({})
   })
-  test('should retorn account on sucess', async () => {
+  test('should retorn account on add sucess', async () => {
     const sut = new AccountMongoRepository()
     const account = await sut.add({
       name: 'name',
