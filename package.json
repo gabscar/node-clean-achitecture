@@ -7,8 +7,9 @@
     "node": "14.x"
   },
   "scripts": {
-    "start": "node dist/main/server.js",
-    "build": "rimraf dist && tsc",
+    "start": "node build/app.js" ,
+    "build": "tsc",
+    "heroku-postbuild": "npm run build",
     "dev": "sucrase-node src/main/server.ts",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
